@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_demo/flutter_demo/flutter_demo.dart';
+import 'package:flutter_demo/flutter_demo/navigator_demo.dart';
+import 'package:flutter_demo/flutter_layout_demo/flutter_layout_demo.dart';
 
 void main() => runApp(MyApp());
 
@@ -6,12 +9,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter 案例',
-      theme: new ThemeData(primarySwatch: Colors.blue),
-      home: MyHomePage(),
-    );
+        title: 'Flutter 案例',
+        theme: new ThemeData(primarySwatch: Colors.blue),
+        home: MyHomePage(),
+        routes: <String, WidgetBuilder>{
+          '/NThirdPage': (context) => NThirdPage(),
+          '/FlutterDemo': (context) => FlutterDemo(),
+          '/FlutterLayoutDemo': (context) => FlutterLayoutDemo(),
+        });
   }
 }
+
+const List<String> list = ['FlutterDemo', 'FlutterLayoutDemo'];
 
 class MyHomePage extends StatelessWidget {
   @override
@@ -20,38 +29,25 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Flutter 案例'),
       ),
-      body: Center(
-        child: new RaisedButton(
-          onPressed: () {
-            // Navigator.push(context, MaterialPageRoute(builder: (context) {
-            //   return SecondPage();
-            // }));
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SecondPage()));
-          },
-          child: Text('跳转页面'),
-        ),
+      body: ListView.builder(
+        itemCount: list.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Center(
+              child: Text(list[index]),
+            ),
+            onTap: () {
+              _navigateToPage(context, list[index]);
+            },
+          );
+        },
       ),
     );
   }
-}
 
-class SecondPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('SecondPage'),
-      ),
-      body: Center(
-        child: RaisedButton(
-          child: Text('第二个页面'),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
-    );
+  //页面跳转
+  void _navigateToPage(BuildContext context, String page) {
+    print("Page:$page");
+    Navigator.of(context).pushNamed('/$page');
   }
 }
