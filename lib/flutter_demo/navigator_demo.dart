@@ -47,7 +47,7 @@ class NThirdPage extends StatelessWidget {
         child: RaisedButton(
           child: Text('第三个页面'),
           onPressed: () {
-           Navigator.popUntil(context, ModalRoute.withName('/FlutterDemo'));
+            Navigator.pop(context);
           },
         ),
       ),

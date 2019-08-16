@@ -15,11 +15,10 @@ class FlutterDemo extends StatelessWidget {
           RaisedButton(
             child: Text('Navigator 使用'),
             onPressed: () {
-                Navigator.of(context).maybePop();
-              // Navigator.push(
-              //   context,
-              //   new MaterialPageRoute(builder: (context) =>new NavigatorDemo())
-              // );
+              Navigator.push(
+                context,
+                new MaterialPageRoute(builder: (context) =>new NavigatorDemo())
+              );
             },
           ),
         ],
